@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import { Button, FormControl } from 'react-bootstrap';
 
 class Newownerform extends Component {
   constructor(props) {
@@ -37,8 +38,10 @@ newName = () => {
       <div>
         {//onClick={()=>{this.props.addPost(this.state)}} v
       }
-        <button onClick={()=>{this.props.addOwner(this.state)}} >New Truck Owner!</button>
-        <input type='text'  placeholder='Name' ref = 'name' onChange = {this.newName}/>
+        <Button
+          bsStyle="primary"
+          block onClick={()=>{if(this.refs.name.value){this.props.addOwner(this.state)}}} >New Owner? Get Started Now!</Button>
+        <input type='text'  placeholder='Please Enter Your Name!' ref = 'name' onChange = {this.newName}/>
     {// <input type='text' onChange = {this.newDescription} placeholder='Description' ref = 'description'/>
     // <input type='text' onChange = {this.newPrice} placeholder='Price' ref = 'price'/>
     // <input type='text' onChange = {this.newImage} placeholder='Image URL' ref = 'imageUrl'/>

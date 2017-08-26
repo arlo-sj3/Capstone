@@ -1,5 +1,10 @@
+Button {
+  color: red; }
+
 body {
   background-color: black; }
 
-.App h1 {
-  color: white; }
+.Background h1 {
+  font-size: 50px;
+  text-align: center;
+  color: yellow; }

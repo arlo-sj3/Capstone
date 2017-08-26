@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bootstrap": "3",
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "knex": "^0.13.0",
     "node-sass-chokidar": "^0.0.3",
     "pg": "^7.2.0",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.11"
   },

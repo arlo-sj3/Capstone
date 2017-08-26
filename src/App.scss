@@ -1,11 +1,16 @@
-$primary: white;
+@import 'partials/_buttons';
+
+$primary: yellow;
 
 body{
   background-color: black
 }
 
-.App {
+.Background {
   h1 {
+    font-size: 50px;
+    text-align: center;
     color: $primary;
+    // background-color: blue;
   }
 }
