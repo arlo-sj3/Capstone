@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import Newownerform from './newOwnerForm.js';
+import Newownermodal from './newOwnerModal.js';
 import Background from './background.js';
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+// import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
 
@@ -51,7 +52,7 @@ class App extends Component {
         </div>
 
         <Newownerform addOwner={this.addOwner}/>
-
+<Newownermodal />
       </div>
     );
   }
