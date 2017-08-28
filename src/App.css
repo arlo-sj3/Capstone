@@ -8,3 +8,11 @@ body {
   font-size: 50px;
   text-align: center;
   color: yellow; }
+
+.modal-container {
+  position: relative; }
+
+#cool {
+  height: 300px;
+  width: 300px;
+  background: red; }

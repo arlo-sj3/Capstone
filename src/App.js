@@ -52,7 +52,10 @@ class App extends Component {
         </div>
 
         <Newownerform addOwner={this.addOwner}/>
-<Newownermodal />
+        <div className = "container">
+          <Newownermodal />
+        </div>
+
       </div>
     );
   }

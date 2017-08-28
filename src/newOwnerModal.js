@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import './App.css';
-import { Button } from 'react-bootstrap';
-import ReactDOM from 'react-dom'
-import Modal from 'react-bootstrap-modal'
+import { Button, Modal } from 'react-bootstrap';
+// import Modal from 'react-bootstrap-modal'
 
 
 
@@ -26,11 +24,12 @@ class Newownermodal extends Component {
 
    open =()=> {
      this.setState({ showModal: true });
+     console.log(this.state.showModal)
    }
 
 
   render() {
-    {// const popover = (
+    // const popover = (
     //   <Popover id="modal-popover" title="popover">
     //     very popover. such engagement
     //   </Popover>
@@ -40,14 +39,14 @@ class Newownermodal extends Component {
     //     wow.
     //   </Tooltip>
     // );
-  }
+
 
     return (
       <div>
 
         <Button
-          bsStyle="primary"
-          bsSize="large"
+          bsStyle="warning"
+          block
           onClick={this.open}
         >
           Launch demo modal
