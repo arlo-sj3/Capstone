@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Newownerform from './newOwnerForm.js';
-import Newownermodal from './newOwnerModal.js';
+import Existingownerform from './existingOwnerForm.js';
 import Background from './background.js';
 // import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
@@ -24,8 +24,8 @@ class App extends Component {
   }
 
   addOwner = async(owner) => {
-
-    console.log(owner.name);
+    delete owner.showModal;
+    console.log(owner);
     const response = await fetch('http://localhost:8000/owner', {
       method: 'POST',
       body: JSON.stringify(owner),
@@ -33,6 +33,8 @@ class App extends Component {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
+    }).catch((ex) => {
+      console.log('parsing failed', ex)
     })
     const json = await response.json()
 
@@ -50,12 +52,14 @@ class App extends Component {
         <div className="Background">
           <Background/>
         </div>
-
-        <Newownerform addOwner={this.addOwner}/>
-        <div className = "container">
-          <Newownermodal />
+        <div className="tupper-ware">
+          <div >
+            <Newownerform addOwner={this.addOwner}/>
+          </div>
+          <div>
+            <Existingownerform/>
+          </div>
         </div>
-
       </div>
     );
   }

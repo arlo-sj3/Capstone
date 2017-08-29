@@ -15,8 +15,18 @@ body{
   }
 }
 
+.tupper-ware {
+  bottom: 0;
+ position: fixed;
+ width: 100%;
+}
+
 .modal-container {
   position: relative;
+}
+
+Button {
+  width: 100%;
 }
 
 #cool{

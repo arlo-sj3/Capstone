@@ -7,7 +7,7 @@ const router = express.Router();
 // YOUR CODE HERE
 
 router.get('/', (req, res, next) => {
-  knex.select('id','name').from('owner')
+  knex.select('id','name','email','password').from('owner')
     .then(function(data) {
       console.log('hello')
       return res.send(data);
@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   let id = req.params.id - 1;
-  knex.select('id','name').from('owner')
+  knex.select('id','name','email','password').from('owner')
     .then(function(data) {
       return res.send(data[id]);
     })
@@ -31,7 +31,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   knex('owner')
     .insert(req.body)
-    .returning(['id','name'])
+    .returning(['id','name','email','password'])
     .then((result) => {
       console.log(result)
       res.send(result[0])
@@ -40,7 +40,7 @@ router.post('/', (req, res, next) => {
 
 router.patch('/:id', (req, res, next) => {
   knex('owner')
-    .returning(['id','name'])
+    .returning(['id','name','email','password'])
     .update(req.body)
     .where('id', req.params.id)
     .then(result => {

@@ -5,11 +5,13 @@ import { Button, Modal } from 'react-bootstrap';
 
 
 
-class Newownermodal extends Component {
+class Existingownerform extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal: false
+      showModal: false,
+      email: '',
+      pass:''
 
     }
   }
@@ -46,33 +48,24 @@ class Newownermodal extends Component {
 
         <Button
           bsStyle="warning"
-          block
+
           onClick={this.open}
         >
-          Launch demo modal
+          Registered Owner? Click Here!
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Header >
+            <Modal.Title>Log in.</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
-            <h4>Popover in a modal</h4>
-            <p>there is a  here</p>
-
-            <h4>Tooltips in a modal</h4>
-            <p>there is a  here</p>
-
-            <hr />
-
-            <h4>Overflowing text to show scroll behavior</h4>
-            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+            <input type='text' placeholder='Enter Your Password!' ref='pass' onChange={this.newPass}></input>
+            <input type='text' placeholder='Enter Your Email!' ref='email' onChange={this.newEmail}></input>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
+            <Button bsStyle="primary" block>SUBMIT
+            </Button>
+            <Button bsStyle="danger" block onClick={this.close}>CLOSE</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -81,6 +74,6 @@ class Newownermodal extends Component {
 
 }
 
-export default Newownermodal
+export default Existingownerform
 
 // ReactDOM.render(<Newownermodal />, document.getElementById('newownermodal'))

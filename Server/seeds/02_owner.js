@@ -6,8 +6,10 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('owner').insert([{
-	id:1,
+	  id:1,
   	name:'Bob',
+    password: 'mooo333',
+    email: 'arlo.sj3@gmail.com'
 }
 ]);
     })
