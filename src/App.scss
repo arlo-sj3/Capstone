@@ -35,9 +35,10 @@ Button {
   background: red;
 }
 
-#map {
+.mapcontainer {
   margin: 0 auto;
+  position: relative;
         width: 75%;
-        height: 400px;
+        height: 600px;
         background-color: grey;
       }

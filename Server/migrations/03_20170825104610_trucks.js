@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('menu').notNullable();
     table.string('contact').notNullable();
     table.string('picture').notNullable().defaultTo('/capstone/public/foodtruck.png');
+    table.integer('fleet_number').notNullable().unique();
     table.integer('business_id').references('business_id');
   })
 };

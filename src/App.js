@@ -95,7 +95,10 @@ for (var i = 0; i < freshOwner[0].length; i++) {
           Welcome: {this.state.currentUser.name}
           <Background/>
         </div>
-        <Mapcontainer />
+        <div className="mapcontainer">
+          <Mapcontainer />
+        </div>
+
         <div className="tupper-ware">
           <div >
             <Newownerform addOwner={this.addOwner}/>
