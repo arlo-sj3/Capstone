@@ -3,6 +3,7 @@ import './App.css';
 import Newownerform from './newOwnerForm.js';
 import Existingownerform from './existingOwnerForm.js';
 import Background from './background.js';
+import Mapcontainer from './mapcontainer.js';
 // import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -94,6 +95,7 @@ for (var i = 0; i < freshOwner[0].length; i++) {
           Welcome: {this.state.currentUser.name}
           <Background/>
         </div>
+        <Mapcontainer />
         <div className="tupper-ware">
           <div >
             <Newownerform addOwner={this.addOwner}/>
