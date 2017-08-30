@@ -6,11 +6,13 @@ const bodyParser = require('body-parser')
 const trucks = require('./routes/trucks.js');
 const owner = require('./routes/owner.js');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // app.use(express.static('./public'));
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(cors());
+app.use(cookieParser())
 
 app.use('/trucks',trucks);
 app.use('/owner',owner);

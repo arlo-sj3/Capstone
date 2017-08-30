@@ -20,7 +20,7 @@ class Newownerform extends Component {
   }
 
   newPass = () => {
-    this.setState({pass: this.refs.pass.value})
+    this.setState({password: this.refs.pass.value})
     console.log("pass:" + this.refs.pass.value)
   }
 
@@ -41,6 +41,8 @@ class Newownerform extends Component {
     this.setState({showModal: true});
     //  console.log(this.state.showModal)
   }
+
+
 
   render() {
     // const popover = (
@@ -74,9 +76,10 @@ class Newownerform extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" block onClick={() => {
-              if (this.refs.name.value) {
+              if (this.refs.name.value && this.refs.pass.value && this.refs.email.value) {
                 this.props.addOwner(this.state)
               }
+              this.close
             }}>SUBMIT
             </Button>
             <Button bsStyle="danger" block onClick={this.close}>CLOSE</Button>

@@ -11,9 +11,20 @@ class Existingownerform extends Component {
     this.state = {
       showModal: false,
       email: '',
-      pass:''
+      password:''
 
     }
+  }
+
+
+  newPass = () => {
+    this.setState({password: this.refs.pass.value})
+    console.log("pass:" + this.refs.pass.value)
+  }
+
+  newEmail = () => {
+    this.setState({email: this.refs.email.value})
+    console.log("email:" + this.refs.email.value)
   }
 
   getInitialState = ()=> {
@@ -63,7 +74,12 @@ class Existingownerform extends Component {
             <input type='text' placeholder='Enter Your Email!' ref='email' onChange={this.newEmail}></input>
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="primary" block>SUBMIT
+            <Button bsStyle="primary" block  onClick={() => {
+              if (this.refs.pass.value && this.refs.email.value) {
+                this.props.oldOwner(this.state)
+              }
+              this.close
+            }}>SUBMIT
             </Button>
             <Button bsStyle="danger" block onClick={this.close}>CLOSE</Button>
           </Modal.Footer>

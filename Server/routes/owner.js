@@ -3,13 +3,17 @@
 const express = require('express');
 const knex = require('../knex')
 const router = express.Router();
+const cookieParser = require('cookie-parser')
+
+
 
 // YOUR CODE HERE
 
 router.get('/', (req, res, next) => {
   knex.select('id','name','email','password').from('owner')
     .then(function(data) {
-      console.log('hello')
+      // console.log('hello')
+
       return res.send(data);
     })
     .catch((err) => {
@@ -33,8 +37,13 @@ router.post('/', (req, res, next) => {
     .insert(req.body)
     .returning(['id','name','email','password'])
     .then((result) => {
-      console.log(result)
+      // console.log(result[0].email);
+      // res.cookie('owner', result[0].email)
+      // console.log(result)
       res.send(result[0])
+    })
+    .catch((err)=>{
+      next(err);
     })
 });
 
