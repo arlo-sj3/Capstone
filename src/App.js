@@ -27,6 +27,7 @@ class App extends Component {
 
   addOwner = async(owner) => {
     delete owner.showModal;
+    delete this.currentUser
     console.log(owner);
     const response = await fetch('http://localhost:8000/owner', {
       method: 'POST',

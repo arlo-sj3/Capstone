@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('business').insert([{
-	id:1,
+	business_id:1,
   	name:'Bobs Burgers',
   	fleet_size:3
 }
@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
     })
     .then(() => {
       return knex.raw(
-        "SELECT setval('business_id_seq', (SELECT MAX(id) FROM business));"
+        "SELECT setval('business_business_id_seq', (SELECT MAX(business_id) FROM business));"
       );
     });
 };

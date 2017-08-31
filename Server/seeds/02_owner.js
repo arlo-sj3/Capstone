@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('owner').insert([{
-	  id:1,
+	  owner_id:1,
   	name:'Bob',
     password: 'mooo333',
     email: 'arlo.sj3@gmail.com'
@@ -15,7 +15,7 @@ exports.seed = function(knex, Promise) {
     })
     .then(() => {
       return knex.raw(
-        "SELECT setval('owner_id_seq', (SELECT MAX(id) FROM owner));"
+        "SELECT setval('owner_owner_id_seq', (SELECT MAX(owner_id) FROM owner));"
       );
     });
 };

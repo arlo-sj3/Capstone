@@ -9,7 +9,7 @@ const router = express.Router();
 // YOUR CODE HERE
 
 router.get('/', (req, res, next) => {
-  knex.select('id','owner_id','business_id').from('owner_business')
+  knex.select('owner_business_id','owner_id','business_id').from('owner_business')
     .then(function(data) {
       // console.log('hello')
 
@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   let id = req.params.id - 1;
-  knex.select('id','owner_id','business_id').from('owner_business')
+  knex.select('owner_business_id','owner_id','business_id').from('owner_business')
     .then(function(data) {
       return res.send(data[id]);
     })
@@ -34,7 +34,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   knex('owner_business')
     .insert(req.body)
-    .returning(['id','owner_id','business_id'])
+    .returning(['owner_business_id','owner_id','business_id'])
     .then((result) => {
       // console.log(result[0].email);
       // res.cookie('owner_business', result[0].email)
@@ -48,9 +48,9 @@ router.post('/', (req, res, next) => {
 
 router.patch('/:id', (req, res, next) => {
   knex('owner_business')
-    .returning(['id','owner_id','business_id'])
+    .returning(['owner_business_id','owner_id','business_id'])
     .update(req.body)
-    .where('id', req.params.id)
+    .where('owner_business_id', req.params.id)
     .then(result => {
       res.send(result[0])
     })
@@ -59,9 +59,9 @@ router.patch('/:id', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
   knex('owner_business')
-    .returning(['id','owner_id','business_id'])
+    .returning(['owner_business_id','owner_id','business_id'])
     .del()
-    .where('id', req.params.id)
+    .where('owner_business_id', req.params.id)
     .then(result => {
       res.send(result[0])
     })
