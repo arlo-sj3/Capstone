@@ -22,7 +22,6 @@ class App extends Component {
     const json = await response.json()
     // this.setState({trucks : json})
     this.setState({owner: json})
-    console.log(this.state.owner)
   }
 
   addOwner = async(owner) => {

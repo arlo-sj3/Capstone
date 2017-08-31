@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Geocoder from 'geocoder'
+import _ from 'lodash';
 
 export class Mapcontainer extends Component {
   constructor(props) {
@@ -11,85 +12,65 @@ export class Mapcontainer extends Component {
 
     this.state = {
       showingInfoWindow: false,
-       activeMarker: {},
-       selectedPlace: {},
-       trucks: []
+      activeMarker: {},
+      selectedPlace: {},
+      trucks: [],
+      spots: []
     }
-    this.onMarkerClick = this.onMarkerClick.bind(this);
   }
 
   async componentDidMount() {
     const response = await fetch('http://localhost:8000/trucks')
     const json = await response.json()
-    // this.setState({trucks : json})
-    this.setState({trucks: json})
-    console.log(this.state.trucks)
-    this.getSpots();
-
+    var result = [];
+    var trucks = json;
+    let promises = [];
+    for (var i = 0; i < trucks.length; i++) {
+      let truck = trucks[i]
+      Geocoder.geocode(truck.location, (err, data) => {
+        data.results[0].geometry.location['name'] = truck.name
+        result.push(data.results[0].geometry.location)
+        this.setState({spots: result, trucks: json})
+      })
+    }
   }
-
-getSpots = () => {
-  let result = [];
-  var trucks = this.state.trucks
-  for (var i = 0; i < trucks.length; i++) {
-    var name = trucks[i].name
-    Geocoder.geocode(trucks[i].location, function ( err, data ) {
-      data.results[0].geometry.location['name']= name
-      result.push(data.results[0].geometry.location)
-    })
-  }
-  console.log(result)
-}
-  // Geocoder.geocode(this.state.trucks[0].location, function ( err, data ) {
-  //   console.log(data.results[0])
-
 
   onMarkerClick = (props, marker, e) => {
-    console.log(this.state.trucks)
+    this.setState({selectedPlace: props, activeMarker: marker, showingInfoWindow: true});
+  }
 
-      this.setState({
-        selectedPlace: props,
-        activeMarker: marker,
-        showingInfoWindow: true
-      });
-    }
-
-
-
-render() {
+  render() {
     return (
-      <Map google={this.props.google} zoom={13} initialCenter={{
-            lat: 	39.754185,
-            lng: -105.230484
-          }}>
+      <div>
 
-{// {function(this.state.trucks.location)}
-}
-          <Marker onClick={this.onMarkerClick}
-    title={'The marker`s title will appear as a tooltip.'}
-    name={'Cannonball Brewing'}
-    position={{lat: 39.768709, lng: -105.234893}}/>
-    <InfoWindow
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
-              <div>
-                <h1>{this.state.selectedPlace.name}</h1>
-              </div>
-          </InfoWindow>
+        <Map google={this.props.google} zoom={13} initialCenter={{
+          lat: 39.754185,
+          lng: -105.230484
+        }}>
+          {this.state.spots.map((spot, i) => {
+            return (<Marker key={i} position={{
+              lat: spot.lat,
+              lng: spot.lng
+            }} onClick={this.onMarkerClick} title={spot.name} name={spot.name}/>)
+          })}
 
-        <Marker onClick={this.onMarkerClick}
-                name={'Golden, CO'} />
-
-        <InfoWindow onClose={this.onInfoWindowClose}>
+          <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
             <div>
               <h1>{this.state.selectedPlace.name}</h1>
             </div>
-        </InfoWindow>
-      </Map>
+          </InfoWindow>
+
+          {
+            //starting marker below
+          // <Marker onClick={this.onMarkerClick}
+          //         name={'Golden, CO'} />
+        }
+
+        </Map>
+
+      </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: ('AIzaSyDqg1UjU5IOsVhWQPMxKg3Lk2fEArXV8sY')
-})(Mapcontainer)
+export default GoogleApiWrapper({apiKey: ('AIzaSyDqg1UjU5IOsVhWQPMxKg3Lk2fEArXV8sY')})(Mapcontainer)
