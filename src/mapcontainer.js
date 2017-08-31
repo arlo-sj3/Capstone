@@ -39,6 +39,15 @@ export class Mapcontainer extends Component {
     this.setState({selectedPlace: props, activeMarker: marker, showingInfoWindow: true});
   }
 
+  onMapClicked = (props)=> {
+   if (this.state.showingInfoWindow) {
+     this.setState({
+       showingInfoWindow: false,
+       activeMarker: null
+     })
+   }
+ }
+
   render() {
     return (
       <div>
@@ -46,7 +55,7 @@ export class Mapcontainer extends Component {
         <Map google={this.props.google} zoom={13} initialCenter={{
           lat: 39.754185,
           lng: -105.230484
-        }}>
+        }} onClick = {this.onMapClicked}>
           {this.state.spots.map((spot, i) => {
             return (<Marker key={i} position={{
               lat: spot.lat,
