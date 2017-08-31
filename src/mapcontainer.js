@@ -77,7 +77,7 @@ render() {
           </InfoWindow>
 
         <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
+                name={'Golden, CO'} />
 
         <InfoWindow onClose={this.onInfoWindowClose}>
             <div>

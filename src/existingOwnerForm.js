@@ -70,8 +70,9 @@ class Existingownerform extends Component {
             <Modal.Title>Log in.</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <input type='text' placeholder='Enter Your Password!' ref='pass' onChange={this.newPass}></input>
             <input type='text' placeholder='Enter Your Email!' ref='email' onChange={this.newEmail}></input>
+            <input type='password' placeholder='Enter Your Password!' ref='pass' onChange={this.newPass}></input>
+
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" block  onClick={() => {
