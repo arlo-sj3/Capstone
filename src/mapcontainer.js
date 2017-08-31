@@ -30,12 +30,13 @@ export class Mapcontainer extends Component {
 
 getSpots = () => {
   let result = [];
-  for (var i = 0; i < this.state.trucks.length; i++) {
-    Geocoder.geocode(this.state.trucks[i].location, function ( err, data ) {
+  var trucks = this.state.trucks
+  for (var i = 0; i < trucks.length; i++) {
+    var name = trucks[i].name
+    Geocoder.geocode(trucks[i].location, function ( err, data ) {
+      data.results[0].geometry.location['name']= name
       result.push(data.results[0].geometry.location)
-
     })
-
   }
   console.log(result)
 }
