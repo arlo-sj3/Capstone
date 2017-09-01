@@ -4,6 +4,7 @@ import Newownerform from './newOwnerForm.js';
 import Existingownerform from './existingOwnerForm.js';
 import Background from './background.js';
 import Mapcontainer from './mapcontainer.js';
+import Logout from './logout.js';
 // import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -85,21 +86,38 @@ for (var i = 0; i < freshOwner[0].length; i++) {
    // this.setState({owner: freshOwner})
     // console.log(this.state.owner)
 
+// hideButtons = () => {
+//   if(this.currentUser){
+//     show = {false}
+//   }
+// }
+
+
 
   }
+
+logout = () => {
+  this.setState({currentUser:''})
+}
 
   render() {
     return (
       <div className="App">
+
+            <Logout logout={this.logout}/>
+
+
         <div className="Background">
           Welcome: {this.state.currentUser.name}
+
           <Background/>
         </div>
         <div className="mapcontainer">
           <Mapcontainer />
         </div>
 
-        <div className="tupper-ware">
+        <div
+          className="tupper-ware">
           <div >
             <Newownerform addOwner={this.addOwner}/>
           </div>

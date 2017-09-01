@@ -16,15 +16,16 @@ class Existingownerform extends Component {
     }
   }
 
+hideButtons = () => {
+  console.log('hey: ' + this.props)
+}
 
   newPass = () => {
     this.setState({password: this.refs.pass.value})
-    console.log("pass:" + this.refs.pass.value)
   }
 
   newEmail = () => {
     this.setState({email: this.refs.email.value})
-    console.log("email:" + this.refs.email.value)
   }
 
   getInitialState = ()=> {
@@ -37,8 +38,8 @@ class Existingownerform extends Component {
 
    open =()=> {
      this.setState({ showModal: true });
-     console.log(this.state.showModal)
    }
+
 
 
   render() {
@@ -52,7 +53,7 @@ class Existingownerform extends Component {
     //     wow.
     //   </Tooltip>
     // );
-
+this.hideButtons();
 
     return (
       <div>
