@@ -8,6 +8,7 @@ exports.seed = function(knex, Promise) {
       return knex('trucks').insert([{
 	trucks_id:1,
     location: '393 Washington Ave, Golden, CO 80403',
+    event_venue: 'Cannonball Brewery',
     type: 'Grillables',
     menu: 'http://longislandreport.org/wp-content/uploads/2011/12/LIVE-Menu.jpg',
     contact: '3035193825',
@@ -18,6 +19,7 @@ exports.seed = function(knex, Promise) {
 {
 trucks_id:2,
 location: '920 12th St, Golden, CO 80401',
+event_venue: 'Golden City Brewery',
 type: 'Grillables',
 menu: 'http://longislandreport.org/wp-content/uploads/2011/12/LIVE-Menu.jpg',
 contact: '3035193825',
@@ -28,6 +30,7 @@ business_id: 1
 {
 trucks_id:3,
 location: '900 Washington Ave, Golden, CO 80401',
+event_venue: 'Mountain Toad Brewing',
 type: 'Grillables',
 menu: 'http://longislandreport.org/wp-content/uploads/2011/12/LIVE-Menu.jpg',
 contact: '3035193825',

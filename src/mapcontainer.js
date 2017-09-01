@@ -28,7 +28,10 @@ export class Mapcontainer extends Component {
     for (var i = 0; i < trucks.length; i++) {
       let truck = trucks[i]
       Geocoder.geocode(truck.location, (err, data) => {
+        console.log(data)
         data.results[0].geometry.location['name'] = truck.name
+        data.results[0].geometry.location['venue'] = truck.event_venue
+        data.results[0].geometry.location['contact'] = truck.contact
         result.push(data.results[0].geometry.location)
         this.setState({spots: result, trucks: json})
       })
@@ -57,10 +60,11 @@ export class Mapcontainer extends Component {
           lng: -105.230484
         }} onClick = {this.onMapClicked}>
           {this.state.spots.map((spot, i) => {
+            console.log(spot);
             return (<Marker key={i} position={{
               lat: spot.lat,
               lng: spot.lng
-            }} onClick={this.onMarkerClick} title={spot.name} name={spot.name}/>)
+            }} onClick={this.onMarkerClick} title={spot.name + ' at ' +  spot.venue + ' Contact: ' + spot.contact} name={spot.name + ' at ' + spot.venue + ' Contact: ' + spot.contact}/>)
           })}
 
           <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
