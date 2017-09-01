@@ -11,10 +11,14 @@ class App extends Component {
 
   constructor(props) {
     super(props)
+
+
     this.state = {
       owner: [],
       trucks: [],
-      currentUser: []
+      currentUser: [],
+      showAdd: true,
+      showLog: false
     }
   }
 
@@ -52,7 +56,7 @@ class App extends Component {
 
     this.setState({owner: freshOwner})
     console.log(this.state.owner)
-    this.setState({currentUser:owner})
+    this.setState({currentUser:owner, showAdd:false, showLog:true})
     console.log(this.state.currentUser)
 
   }
@@ -80,7 +84,7 @@ for (var i = 0; i < freshOwner[0].length; i++) {
   if(freshOwner[0][i].email === owner.email && freshOwner[0][i].pass === owner.pass){
   console.log('success')
   console.log(freshOwner[0][i])
-  this.setState({currentUser: freshOwner[0][i]})
+  this.setState({currentUser: freshOwner[0][i], showAdd:false, showLog:true})
   }
 }
    // this.setState({owner: freshOwner})
@@ -97,18 +101,19 @@ for (var i = 0; i < freshOwner[0].length; i++) {
   }
 
 logout = () => {
-  this.setState({currentUser:''})
+  this.setState({currentUser:'', showAdd: true, showLog: false})
 }
 
   render() {
     return (
       <div className="App">
 
-            <Logout logout={this.logout}/>
+            {this.state.showLog?<Logout
+              logout={this.logout}/>:null}
 
 
         <div className="Background">
-          Welcome: {this.state.currentUser.name}
+          {this.state.showLog? <h1>Welcome: {this.state.currentUser.name}</h1>:null}
 
           <Background/>
         </div>
@@ -116,7 +121,7 @@ logout = () => {
           <Mapcontainer />
         </div>
 
-        <div
+        {this.state.showAdd?<div
           className="tupper-ware">
           <div >
             <Newownerform addOwner={this.addOwner}/>
@@ -124,7 +129,7 @@ logout = () => {
           <div>
             <Existingownerform oldOwner={this.oldOwner}/>
           </div>
-        </div>
+        </div>:null}
       </div>
     );
   }
