@@ -19,6 +19,7 @@ class App extends Component {
       trucks: [],
       currentUser: [],
       business: [],
+      currentBusiness: [],
       showAdd: true,
       showLog: false,
       showMap: true,
@@ -123,6 +124,9 @@ class App extends Component {
     this.setState({business: freshBusiness})
     this.setState({showAdd:false, showLog:true, showMap:false,})
     console.log(this.state.business);
+    this.setState({currentBusiness:business});
+    console.log(this.state.currentBusiness);
+
   }
 
 
