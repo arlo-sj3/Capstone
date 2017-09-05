@@ -5,6 +5,7 @@ import Existingownerform from './existingOwnerForm.js';
 import Background from './background.js';
 import Mapcontainer from './mapcontainer.js';
 import Logout from './logout.js';
+import Newbusinessform from './newBusinessForm.js';
 // import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -17,8 +18,11 @@ class App extends Component {
       owner: [],
       trucks: [],
       currentUser: [],
+      business: [],
       showAdd: true,
-      showLog: false
+      showLog: false,
+      showMap: true,
+      showNextForm:false
     }
   }
 
@@ -27,6 +31,13 @@ class App extends Component {
     const json = await response.json()
     // this.setState({trucks : json})
     this.setState({owner: json})
+  }
+
+  async componentDidMount() {
+    const response = await fetch('http://localhost:8000/business')
+    const json = await response.json()
+    // this.setState({trucks : json})
+    this.setState({business: json})
   }
 
   addOwner = async(owner) => {
@@ -56,17 +67,15 @@ class App extends Component {
 
     this.setState({owner: freshOwner})
     console.log(this.state.owner)
-    this.setState({currentUser:owner, showAdd:false, showLog:true})
+    this.setState({currentUser:owner, showAdd:false, showLog:true, showMap:false, showNextForm: true})
     console.log(this.state.currentUser)
 
   }
 
   oldOwner = async(owner) => {
     delete owner.showModal;
-    console.log(owner);
     const response = await fetch('http://localhost:8000/owner', {
       method: 'GET',
-
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -77,31 +86,50 @@ class App extends Component {
     const json = await response.json()
 
     let freshOwner = [json];
-    console.log(freshOwner)
 
-for (var i = 0; i < freshOwner[0].length; i++) {
+    for (var i = 0; i < freshOwner[0].length; i++) {
 
-  if(freshOwner[0][i].email === owner.email && freshOwner[0][i].pass === owner.pass){
-  console.log('success')
-  console.log(freshOwner[0][i])
-  this.setState({currentUser: freshOwner[0][i], showAdd:false, showLog:true})
+      if(freshOwner[0][i].email === owner.email && freshOwner[0][i].pass === owner.pass){
+      this.setState({currentUser: freshOwner[0][i], showAdd:false, showLog:true, showMap:false, showNextForm: true})
+    }
   }
 }
-   // this.setState({owner: freshOwner})
-    // console.log(this.state.owner)
-
-// hideButtons = () => {
-//   if(this.currentUser){
-//     show = {false}
-//   }
-// }
 
 
+  addBusiness = async (business) => {
+    delete business.showModal;
+    business.owner_id = this.state.currentUser.owner_id;
+    const response = await fetch('http://localhost:8000/business', {
+      method: 'POST',
+      body: JSON.stringify(business),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).catch((ex) => {
+      console.log('parsing failed', ex)
+    })
+    if(response.ok === false){
+      return alert('bad email')
+    }
+    const json = await response.json()
+    console.log(business);
+    let freshBusiness = [json];
+    console.log(freshBusiness)
+    for (var i = 0; i < this.state.business.length; i++) {
+      freshBusiness.push(this.state.business[i]);
+    }
 
+    this.setState({business: freshBusiness})
+    this.setState({showAdd:false, showLog:true, showMap:false,})
+    console.log(this.state.business);
   }
 
+
+
+
 logout = () => {
-  this.setState({currentUser:'', showAdd: true, showLog: false})
+  this.setState({currentUser:'', showAdd: true, showLog: false, showMap:true, showNextForm: false})
 }
 
   render() {
@@ -113,13 +141,16 @@ logout = () => {
 
 
         <div className="Background">
-          {this.state.showLog? <h1>Welcome: {this.state.currentUser.name}</h1>:null}
+          {this.state.showLog? <div className="welcome">Welcome: {this.state.currentUser.name}</div>:null}
 
           <Background/>
         </div>
-        <div className="mapcontainer">
+
+        {this.state.showNextForm? <Newbusinessform  addBusiness={this.addBusiness} />:null}
+
+        {this.state.showMap? <div className="mapcontainer">
           <Mapcontainer />
-        </div>
+        </div>:null }
 
         {this.state.showAdd?<div
           className="tupper-ware">

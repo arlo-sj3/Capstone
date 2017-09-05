@@ -16,9 +16,6 @@ class Existingownerform extends Component {
     }
   }
 
-hideButtons = () => {
-  console.log('hey: ' + this.props)
-}
 
   newPass = () => {
     this.setState({password: this.refs.pass.value})
@@ -53,7 +50,6 @@ hideButtons = () => {
     //     wow.
     //   </Tooltip>
     // );
-this.hideButtons();
 
     return (
       <div>

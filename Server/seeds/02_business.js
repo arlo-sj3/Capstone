@@ -7,6 +7,7 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('business').insert([{
 	business_id:1,
+  owner_id: 1,
   	name:'Bobs Burgers',
   	fleet_size:3
 }
