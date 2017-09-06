@@ -29,21 +29,21 @@ class App extends Component {
     }
   }
 
-  async componentDidMount() {
+  async getOwners() {
     const response = await fetch('http://localhost:8000/owner')
     const json = await response.json()
     // this.setState({trucks : json})
     this.setState({owner: json})
   }
 
-  async componentDidMount() {
+  async getBusinesses() {
     const response = await fetch('http://localhost:8000/business')
     const json = await response.json()
     // this.setState({trucks : json})
     this.setState({business: json})
   }
 
-  async componentDidMount() {
+  async getTrucks() {
     const response = await fetch('http://localhost:8000/trucks')
     const json = await response.json()
     console.log('trucks res', json);
@@ -142,7 +142,6 @@ class App extends Component {
 
   addTruck = async (truck) => {
     delete truck.showModal;
-
     const response = await fetch('http://localhost:8000/trucks', {
       method: 'POST',
       body: JSON.stringify(truck),
@@ -195,7 +194,7 @@ logout = () => {
           <Background/>
         </div>
 
-        <Truckdetailsform addTruck = {this.addTruck}/>
+        {this.state.currentBusiness?<Truckdetailsform addTruck = {this.addTruck}/>:null}
 
         {this.state.showNextForm? <Newbusinessform  addBusiness={this.addBusiness} />:null}
 
