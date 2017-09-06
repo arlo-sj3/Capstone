@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import Newownerform from './newOwnerForm.js';
+
 import Existingownerform from './existingOwnerForm.js';
+import Truckdetailsform from './truckDetailsForm.js'
 import Background from './background.js';
 import Mapcontainer from './mapcontainer.js';
 import Logout from './logout.js';
@@ -19,7 +21,7 @@ class App extends Component {
       trucks: [],
       currentUser: [],
       business: [],
-      currentBusiness: [],
+      currentBusiness: null,
       showAdd: true,
       showLog: false,
       showMap: true,
@@ -39,6 +41,14 @@ class App extends Component {
     const json = await response.json()
     // this.setState({trucks : json})
     this.setState({business: json})
+  }
+
+  async componentDidMount() {
+    const response = await fetch('http://localhost:8000/trucks')
+    const json = await response.json()
+    console.log('trucks res', json);
+    // this.setState({trucks : json})
+    this.setState({trucks: json})
   }
 
   addOwner = async(owner) => {
@@ -124,10 +134,45 @@ class App extends Component {
     this.setState({business: freshBusiness})
     this.setState({showAdd:false, showLog:true, showMap:false,})
     console.log(this.state.business);
-    this.setState({currentBusiness:business});
+    this.setState({currentBusiness:json});
     console.log(this.state.currentBusiness);
 
+
   }
+
+  addTruck = async (truck) => {
+    delete truck.showModal;
+
+    const response = await fetch('http://localhost:8000/trucks', {
+      method: 'POST',
+      body: JSON.stringify(truck),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).catch((ex) => {
+      console.log('parsing failed', ex)
+    })
+    if(response.ok === false){
+      return alert('bad email')
+    }
+    const json = await response.json()
+    console.log(truck);
+    let freshTruck = [json];
+    console.log(freshTruck)
+    for (var i = 0; i < this.state.trucks.length; i++) {
+      freshTruck.push(this.state.trucks[i]);
+    }
+
+    this.setState({truck: freshTruck})
+    this.setState({showAdd:false, showLog:true, showMap:false,})
+    console.log(this.state.trucks);
+    this.setState({currentTruck:truck});
+    console.log(this.state.currentTruck);
+
+
+  }
+
 
 
 
@@ -149,6 +194,8 @@ logout = () => {
 
           <Background/>
         </div>
+
+        <Truckdetailsform addTruck = {this.addTruck}/>
 
         {this.state.showNextForm? <Newbusinessform  addBusiness={this.addBusiness} />:null}
 

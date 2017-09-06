@@ -9,9 +9,9 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   knex.select('trucks_id','location','event_venue','type','menu','contact','picture','fleet_number','business.business_id', 'business.name')
   .from('trucks')
-  .join('business', 'trucks.business_id', 'business.business_id')
+  .leftJoin('business', 'trucks.business_id', 'business.business_id')
     .then(function(data) {
-      console.log('hello')
+      console.log('hey')
       return res.send(data);
     })
     .catch((err) => {
