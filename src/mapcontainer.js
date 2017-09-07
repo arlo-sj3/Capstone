@@ -25,10 +25,18 @@ export class Mapcontainer extends Component {
     var result = [];
     var trucks = json;
     let promises = [];
+    var defName = "burgers"
     for (var i = 0; i < trucks.length; i++) {
       let truck = trucks[i]
-      Geocoder.geocode(truck.location, (err, data) => {
-        data.results[0].geometry.location['name'] = truck.name
+      console.log(json);
+      Geocoder.geocode(truck.location, (err, data) =>{
+console.log(this.props);
+        if (this.props.currentBusiness){
+
+         data.results[0].geometry.location['name'] =  this.props.currentBusiness.name}
+         else {
+           data.results[0].geometry.location['name'] =  defName
+         }
         data.results[0].geometry.location['venue'] = truck.event_venue
         data.results[0].geometry.location['contact'] = truck.contact
         result.push(data.results[0].geometry.location)

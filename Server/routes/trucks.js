@@ -31,12 +31,23 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+  var truck
   knex('trucks')
     .insert(req.body)
     .returning(['trucks_id','location','event_venue','type','menu','contact','picture','fleet_number','business_id'])
     .then((result) => {
       console.log(result)
-      res.send(result[0])
+      truck = result
+      // res.send(result[0])
+      return knex('business')
+      .returning(['name'])
+    })
+    .then(function(business){
+      res.send( {
+      business:business,
+      truck:truck
+    }
+    )
     })
 });
 
