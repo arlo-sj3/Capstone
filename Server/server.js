@@ -8,18 +8,19 @@ const owner = require('./routes/owner.js');
 const business = require('./routes/business.js');
 const owner_business = require('./routes/owner_business.js');
 const cors = require('cors');
+const path = require('path')
 
 
 // app.use(express.static('./public'));
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(cors());
-
-
 app.use('/trucks',trucks);
 app.use('/owner',owner);
 app.use('/business',business)
 app.use('owner_business',owner_business)
+app.use(express.static(path.join(__dirname, 'src/build')));
+
 
 const port = process.env.PORT || 8000;
 

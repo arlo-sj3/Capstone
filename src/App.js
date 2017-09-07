@@ -180,7 +180,7 @@ class App extends Component {
 
 
 logout = () => {
-  this.setState({currentUser:'', showAdd: true, showLog: false, showMap:true, showNextForm: false})
+  this.setState({currentUser:'', showAdd: true, showLog: false, showMap:true, showNextForm: false, currentBusiness:''})
 }
 
   render() {
