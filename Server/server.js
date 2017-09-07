@@ -19,7 +19,7 @@ app.use('/trucks',trucks);
 app.use('/owner',owner);
 app.use('/business',business)
 app.use('owner_business',owner_business)
-app.use(express.static(path.join(__dirname, 'src/build')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 const port = process.env.PORT || 8000;

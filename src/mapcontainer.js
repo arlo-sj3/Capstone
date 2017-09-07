@@ -20,7 +20,7 @@ export class Mapcontainer extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('http://localhost:8000/trucks')
+    const response = await fetch('/trucks')
     const json = await response.json()
     var result = [];
     var trucks = json;

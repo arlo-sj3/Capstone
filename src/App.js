@@ -30,21 +30,21 @@ class App extends Component {
   }
 
   async getOwners() {
-    const response = await fetch('http://localhost:8000/owner')
+    const response = await fetch('/owner')
     const json = await response.json()
     // this.setState({trucks : json})
     this.setState({owner: json})
   }
 
   async getBusinesses() {
-    const response = await fetch('http://localhost:8000/business')
+    const response = await fetch('/business')
     const json = await response.json()
     // this.setState({trucks : json})
     this.setState({business: json})
   }
 
   async getTrucks() {
-    const response = await fetch('http://localhost:8000/trucks')
+    const response = await fetch('/trucks')
     const json = await response.json()
     console.log('trucks res', json);
     // this.setState({trucks : json})
@@ -55,7 +55,7 @@ class App extends Component {
     delete owner.showModal;
     delete this.currentUser
     console.log(owner);
-    const response = await fetch('http://localhost:8000/owner', {
+    const response = await fetch('/owner', {
       method: 'POST',
       body: JSON.stringify(owner),
       headers: {
@@ -85,7 +85,7 @@ class App extends Component {
 
   oldOwner = async(owner) => {
     delete owner.showModal;
-    const response = await fetch('http://localhost:8000/owner', {
+    const response = await fetch('/owner', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ class App extends Component {
   addBusiness = async (business) => {
     delete business.showModal;
     business.owner_id = this.state.currentUser.owner_id;
-    const response = await fetch('http://localhost:8000/business', {
+    const response = await fetch('/business', {
       method: 'POST',
       body: JSON.stringify(business),
       headers: {
@@ -145,7 +145,7 @@ class App extends Component {
     delete truck.showModal;
     truck.business_id = this.state.currentBusiness.business_id
     // truck.name = this.state.currentBusiness.name;
-    const response = await fetch('http://localhost:8000/trucks', {
+    const response = await fetch('/trucks', {
       method: 'POST',
       body: JSON.stringify(truck),
       headers: {
