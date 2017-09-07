@@ -141,7 +141,9 @@ class App extends Component {
   }
 
   addTruck = async (truck) => {
+    console.log(this.state.currentBusiness)
     delete truck.showModal;
+    truck.business_id = this.state.currentBusiness.business_id
     // truck.name = this.state.currentBusiness.name;
     const response = await fetch('http://localhost:8000/trucks', {
       method: 'POST',
@@ -200,7 +202,7 @@ logout = () => {
         {this.state.showNextForm? <Newbusinessform  addBusiness={this.addBusiness} />:null}
 
         {this.state.showMap? <div className="mapcontainer">
-          <Mapcontainer currentBusiness={this.currentBusiness}/>
+          <Mapcontainer currentBusiness={this.state.currentBusiness}/>
         </div>:null }
 
         {this.state.showAdd?<div
